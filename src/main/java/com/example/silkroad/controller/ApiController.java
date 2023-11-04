@@ -1,13 +1,12 @@
 package com.example.silkroad.controller;
 
+import com.example.silkroad.dto.RoadMapRequest;
 import com.example.silkroad.dto.RoadMapResponse;
 import com.example.silkroad.service.RoadMapService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.swing.plaf.basic.BasicDesktopIconUI;
 import java.io.IOException;
 
 @RestController
@@ -16,9 +15,11 @@ import java.io.IOException;
 public class ApiController {
     final RoadMapService roadMapService;
 
-    @GetMapping("/occupation/{job-name}")
-    public RoadMapResponse occupation(@PathVariable(name = "job-name") String name) throws IOException {
+    @GetMapping("/occupation")
+    public RoadMapResponse occupation(@RequestParam(required = false) RoadMapRequest request) {
         //TODO: server to server 통신 후 객체 생성 및 반환 구현. 지금은 임시로 String 반환
-        return roadMapService.getRoadMap();
+        //String roadMap = roadMapService.GenerateRoadMapFromPython(request);
+        return roadMapService.convertStringToRoadMap("test");
+
     }
 }
