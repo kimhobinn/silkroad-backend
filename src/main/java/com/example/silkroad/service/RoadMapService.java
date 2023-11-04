@@ -1,6 +1,6 @@
 package com.example.silkroad.service;
 
-import com.example.silkroad.dto.RoadMap;
+import com.example.silkroad.dto.RoadMapResponse;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -17,13 +17,13 @@ public class RoadMapService {
     public RoadMapService() throws IOException {
     }
 
-    public RoadMap getRoadMap() throws IOException {
+    public RoadMapResponse getRoadMap() throws IOException {
         String str, section = "";
         Status status = null;
 
-        RoadMap roadMap = new RoadMap();
-        roadMap.setOccupation(fileReader.readLine());
-        roadMap.setTitle(fileReader.readLine());
+        RoadMapResponse roadMapResponse = new RoadMapResponse();
+        roadMapResponse.setOccupation(fileReader.readLine());
+        roadMapResponse.setTitle(fileReader.readLine());
         while ((str = fileReader.readLine()) != null ){
             if(str.isBlank()) continue;
             if(str.startsWith("-")) break;
@@ -38,14 +38,14 @@ public class RoadMapService {
                 }
             } else if(str.contains("*")){
                 switch (status){
-                    case Section -> roadMap.addContentBySection(section, str);
-                    case Additional -> roadMap.addAdditionalDataBySection(section, str);
-                    case Tip -> roadMap.addTip(str);
+                    case Section -> roadMapResponse.addContentBySection(section, str);
+                    case Additional -> roadMapResponse.addAdditionalDataBySection(section, str);
+                    case Tip -> roadMapResponse.addTip(str);
 
                 }
             }
         }
-        return roadMap;
+        return roadMapResponse;
     }
 }
 

@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class RoadMap {
+public class RoadMapResponse {
     String occupation;
     String title;
     Map<String, List<String>> content = new HashMap<>();
