@@ -135,11 +135,14 @@ public class RoadMapService {
                 .collect(Collectors.toList());
         RoadMapResponse roadMapResponse = new RoadMapResponse();
         roadMapResponse.setOccupation(lines.get(0));
-        roadMapResponse.setTitle(lines.get(1));
+
+        roadMapResponse.setTitle(lines.get(1).replace("**", ""));
 
         for(int i = 2; i < lines.size(); i++){
             String str = lines.get(i);
             if(str.startsWith("**")) {
+                str = str.replace("**", "");
+                str = str.strip();
                 if (str.contains("개월") || str.contains("월")) {
                     status = Status.Section;
                     section = str;
@@ -149,6 +152,8 @@ public class RoadMapService {
                     status = Status.Tip;
                 }
             } else if(str.contains("*")){
+                str = str.replace("*", "");
+                str = str.strip();
                 switch (status){
                     case Section -> roadMapResponse.addContentBySection(section, str);
                     case Additional -> roadMapResponse.addAdditionalDataBySection(section, str);
