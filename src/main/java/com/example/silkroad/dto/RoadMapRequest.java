@@ -1,5 +1,6 @@
 package com.example.silkroad.dto;
 
+import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -21,6 +22,13 @@ public class RoadMapRequest {
     int period = 1;
     Period periodType = Period.YEAR;
 
+    @AssertTrue(message = "입력된 기간이 너무 짧습니다. 최소 6개월 이상의 로드맵을 그려보세요")
+    public boolean isRequestMinimumPeriodCheck(){
+        if(periodType == Period.MONTH && period < 6){
+            return false;
+        }
+        return true;
+    }
 }
 
 enum Period{
