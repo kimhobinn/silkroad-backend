@@ -15,7 +15,7 @@ public class ApiController {
     final RoadMapService roadMapService;
 
     @GetMapping("/occupation")
-    public RoadMapResponse occupation(@Valid @RequestParam(required = false) RoadMapRequest request) {
+    public RoadMapResponse occupation(@Valid RoadMapRequest request) {
         //TODO: server to server 통신 후 객체 생성 및 반환 구현. 지금은 임시로 String 반환
         //String roadMap = roadMapService.GenerateRoadMapFromPython(request);
         return roadMapService.convertStringToRoadMap("test");
