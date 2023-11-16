@@ -5,15 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
+@RequiredArgsConstructor
 public class OutlookResponse {
     private String occupation;
     private String title;
