@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class OutlookService {
     public String GenerateOutlookFromPython(OutlookRequest request){
         URI uri = UriComponentsBuilder
-                .fromUriString("http://host.docker.internal:8080")
+                .fromUriString("http://djangoapp:8080")
                 .path("/api/outlook")
                 .build()
                 .toUri();
