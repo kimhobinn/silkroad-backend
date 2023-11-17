@@ -19,7 +19,7 @@ public class RoadMapRequest {
 
     private Period periodType;
 
-    @AssertTrue(message = "입력된 기간이 너무 짧습니다. 최소 6개월 이상의 로드맵을 그려보세요")
+    @AssertTrue(message = "입력된 기간이 너무 짧습니다. 최소 6개월 이상의 로드맵을 그려보세요.")
     public boolean isRequestMinimumPeriodCheck(){
         if(periodType == Period.MONTH && period < 6){
             return false;
@@ -27,7 +27,7 @@ public class RoadMapRequest {
         return true;
     }
 
-    @AssertTrue(message = "입력된 기간이 너무 ")
+    @AssertTrue(message = "입력된 기간이 너무 깁니다. 최대 6년까지의 로드맵을 그리실 수 있습니다.")
     public boolean isRequestMaximumPeriodCheck(){
         if(periodType == Period.YEAR && period > 6){
             return false;

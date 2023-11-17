@@ -16,12 +16,12 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
 
 public class RoadMapService {
-    //TODO : text를 읽어오는 것이 아닌 Server to Server 연결 구현 예정
 
     public RoadMapService() throws IOException {
     }
@@ -34,7 +34,7 @@ public class RoadMapService {
                 .toUri();
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = restTemplate.postForEntity(uri, request, String.class);
-        if(response.getBody().equals("없음")){
+        if(Objects.equals(response.getBody(), "없음")){
             throw new NoExistOccupationException(UserErrorCode.NOT_EXIST_OCCUPATION);
         }
         return response.getBody();
@@ -45,14 +45,7 @@ public class RoadMapService {
         String section = "";
         Status status = Status.Section;
 
-        //lines = Arrays.stream(roadMap.split(System.lineSeparator())).filter(s -> !s.isBlank()).toList();
         lines = Arrays.stream(roadMap.replace("\\n", "&").split("&")).filter(s->!s.isBlank()).toList();
-//        lines = roadMap.
-//                .filter(s -> !s.isBlank())
-//                .collect(Collectors.toList());
-        System.out.println("------------------gpt string --------------------");
-        System.out.println(lines);
-        System.out.println("-------------------------------------------------");
         RoadMapResponse roadMapResponse = new RoadMapResponse();
         roadMapResponse.setOccupation(lines.get(0));
 
