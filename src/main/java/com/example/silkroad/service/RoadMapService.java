@@ -27,8 +27,9 @@ public class RoadMapService {
     }
 
     public String GenerateRoadMapFromPython(RoadMapRequest request){
+        System.out.println(request);
         URI uri = UriComponentsBuilder
-                .fromUriString("http://djangoapp:8080")
+                .fromUriString("http://host.docker.internal:8080")
                 .path("api/occupation")
                 .build()
                 .toUri();

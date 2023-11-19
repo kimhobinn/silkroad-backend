@@ -16,8 +16,10 @@ import java.util.stream.Collectors;
 @Service
 public class OutlookService {
     public String GenerateOutlookFromPython(OutlookRequest request){
+        System.out.println(request);
+
         URI uri = UriComponentsBuilder
-                .fromUriString("http://djangoapp:8080")
+                .fromUriString("http://host.docker.internal:8080")
                 .path("/api/outlook")
                 .build()
                 .toUri();
@@ -36,7 +38,7 @@ public class OutlookService {
         outlookResponse.setTitle(lines.get(1).replace("*", ""));
         for(int i = 2; i < lines.size(); i++){
             String str = lines.get(i);
-            if(str.startsWith("**")){
+            if(str.startsWith("**") || str.startsWith("--") || str.startsWith("##")){
                 str = str.replace("*", "");
                 str = str.strip();
                 if(str.contains("긍정"))
@@ -49,7 +51,7 @@ public class OutlookService {
                     status = Status.EXPORT;
                 }
             }
-            else if(str.startsWith("*")){
+            else if(str.startsWith("*") || str.startsWith("-") || str.startsWith("#")){
                 int idx = str.lastIndexOf("**");
                 String key = str.substring(0, idx).replace("*", "").strip();
                 String value = str.substring(idx).replace("*", "").strip();

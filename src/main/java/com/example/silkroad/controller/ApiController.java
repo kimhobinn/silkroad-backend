@@ -10,6 +10,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URLEncoder;
+
 
 @RestController
 @RequestMapping("/api")
@@ -20,6 +22,8 @@ public class ApiController {
     private final OutlookService outlookService;
     @GetMapping("/occupation")
     public RoadMapResponse occupation(@Valid @ModelAttribute RoadMapRequest request) {
+//        String id= URLEncoder.encode(request.getOccupation(), "UTF-8")
+        출처: https://liante0904.tistory.com/65 [Liante의 이야기:티스토리]
         return roadMapService.convertStringToRoadMap(roadMapService.GenerateRoadMapFromPython(request));
     }
 
